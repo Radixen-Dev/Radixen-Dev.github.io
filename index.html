@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radixen - Coming Soon</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-light: #FCF9F9;
+            --color-cyan: #59BBD7;
+            --color-blue-dark: #1D5B94;
+            --color-blue-bright: #2888C2;
+            --color-navy: #171B33;
+            --font-display: 'Poppins', 'Segoe UI', sans-serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--color-navy) 0%, #0f1428 50%, var(--color-blue-dark) 100%);
+            color: var(--color-light);
+            font-family: var(--font-body);
+            position: relative;
+        }
+
+        /* Animated background gradient orbs */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(88, 187, 215, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -20%;
+            left: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(29, 91, 148, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 10s ease-in-out infinite reverse;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -30px); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
+            gap: 20px;
+        }
+
+        /* Logo styling */
+        .logo-container {
+            margin-bottom: 20px;
+            animation: slideInDown 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Text content */
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 800;
+            font-family: var(--font-display);
+            margin-bottom: 0;
+            letter-spacing: -2px;
+            animation: slideInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+            background: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-blue-bright) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        p {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            color: rgba(252, 249, 249, 0.8);
+            margin-bottom: 0;
+            line-height: 1.7;
+            animation: slideInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* Contact button */
+        .contact-btn {
+            padding: 10px 24px;
+            background: rgba(89, 187, 215, 0.15);
+            border: 2px solid var(--color-cyan);
+            color: var(--color-cyan);
+            border-radius: 25px;
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+            animation: slideInUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s both;
+        }
+
+        .contact-btn:hover {
+            background: rgba(89, 187, 215, 0.25);
+            box-shadow: 0 5px 20px rgba(89, 187, 215, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .contact-btn:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 640px) {
+            .contact-btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Scroll hint */
+        .scroll-hint {
+            position: fixed;
+            bottom: 110px;
+            left: 50%;
+            animation: scrollBounce 2s ease-in-out infinite, scrollSlideIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s both;
+            opacity: 0.6;
+            z-index: 3;
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        @keyframes scrollSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(40px);
+            }
+            to {
+                opacity: 0.6;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        /* Social links */
+        .social-links {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            display: flex;
+            gap: 20px;
+            z-index: 3;
+            animation: socialSlideIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) 1s both;
+        }
+
+        @keyframes socialSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(89, 187, 215, 0.5);
+            color: var(--color-cyan);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            border-color: var(--color-blue-bright);
+            background: rgba(40, 136, 194, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(40, 136, 194, 0.3);
+        }
+
+        /* Loading spinner */
+        .loader {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(89, 187, 215, 0.2);
+            border-top: 4px solid var(--color-cyan);
+            border-right: 4px solid var(--color-blue-bright);
+            border-radius: 50%;
+            animation: spinLoad 0.8s linear infinite;
+        }
+
+        @keyframes spinLoad {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .container {
+                padding: 60px 20px;
+            }
+
+            .logo {
+                width: 90px;
+                height: 90px;
+            }
+
+            .hexagon-inner {
+                font-size: 45px;
+            }
+
+
+
+            .social-links {
+                bottom: 30px;
+                gap: 15px;
+            }
+
+            .social-link {
+                width: 45px;
+                height: 45px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body::before,
+            body::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <div class="logo">
+                <img src="assets/logo.png" alt="Radixen Logo">
+            </div>
+        </div>
+
+        <h1>Something Amazing is Coming</h1>
+        <p>We're building something extraordinary. Stay tuned.</p>
+        <a href="mailto:contact@radixen.com" class="contact-btn">Get in Touch</a>
+    </div>
+
+    <div class="scroll-hint">↓</div>
+
+    <!-- Social links - optional, update with your actual links -->
+    <div class="social-links">
+        <a href="https://github.com/radixen-dev" class="social-link" title="GitHub">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+        </a>
+    </div>
+
+</body>
+</html>
